@@ -75,6 +75,9 @@ class FrogPilotEvents:
     else:
       self.stopped_for_light = False
 
+    if not frogpilot_toggles.conditional_experimental_mode and self.frogpilot_planner.cem.stop_light_detected and not self.frogpilot_planner.tracking_lead:
+      self.events.add(FrogPilotEventName.stopLightOrSign)
+
     if "holidayActive" not in self.played_events and self.startup_seen and alerts_empty and len(self.events) == 0 and frogpilot_toggles.current_holiday_theme != "stock":
       self.events.add(FrogPilotEventName.holidayActive)
 
@@ -221,3 +224,4 @@ class FrogPilotEvents:
       self.events.add(FrogPilotEventName.turningLeft)
     elif sm["frogpilotModelV2"].turnDirection == TurnDirection.turnRight:
       self.events.add(FrogPilotEventName.turningRight)
+

@@ -1070,6 +1070,14 @@ FROGPILOT_EVENTS: dict[int, dict[str, Alert | AlertCallbackType]] = {
       Priority.MID, VisualAlert.none, AudibleAlert.prompt, 3.),
   },
 
+  FrogPilotEventName.stopLightOrSign: {
+    ET.PERMANENT: Alert(
+      "Stop Light/Sign Detected. Please Brake.",
+      "",
+      AlertStatus.userPrompt, AlertSize.small,
+      Priority.MID, VisualAlert.none, AudibleAlert.prompt, 3.),
+  },
+
   FrogPilotEventName.holidayActive: {
     ET.PERMANENT: holiday_alert,
   },
