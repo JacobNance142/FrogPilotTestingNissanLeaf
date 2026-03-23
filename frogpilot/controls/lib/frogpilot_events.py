@@ -213,7 +213,7 @@ class FrogPilotEvents:
     self.startup_seen |= sm["frogpilotControlsState"].alertText1 == frogpilot_toggles.startup_alert_top and sm["frogpilotControlsState"].alertText2 == frogpilot_toggles.startup_alert_bottom
 
     if sm["frogpilotCarState"].trafficModeEnabled != self.previous_traffic_mode:
-      if self.previous_traffic_mode:
+      if self.previous_traffic_mode: 
         self.events.add(FrogPilotEventName.trafficModeInactive)
       else:
         self.events.add(FrogPilotEventName.trafficModeActive)
