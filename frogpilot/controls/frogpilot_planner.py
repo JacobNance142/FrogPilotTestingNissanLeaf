@@ -162,6 +162,7 @@ class FrogPilotPlanner:
     frogpilotPlan.maxAcceleration = self.frogpilot_acceleration.max_accel
     frogpilotPlan.minAcceleration = self.frogpilot_acceleration.min_accel
 
+    frogpilotPlan.modelLength = self.model_length
     frogpilotPlan.redLight = self.cem.stop_light_detected
 
     frogpilotPlan.roadCurvature = self.road_curvature
