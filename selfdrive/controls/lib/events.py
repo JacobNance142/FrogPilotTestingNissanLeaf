@@ -400,7 +400,7 @@ def stop_light_or_sign_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.
     description = f"Stop approaching in {round(model_length * 3.28084)}ft"
 
   return Alert(
-    "Stop Light/Sign Detected",
+    "Stop Light/Sign Detected. Please Brake.",
     description,
     AlertStatus.userPrompt, AlertSize.mid,
     Priority.MID, VisualAlert.none, AudibleAlert.prompt, 3.)
