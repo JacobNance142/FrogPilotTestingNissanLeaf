@@ -1,11 +1,13 @@
 <div align="center" style="text-align: center;">
 
 <h1>openpilot</h1>
+<h1>This Fork is for testing purposes only. Do not download and use this code as it could be buggy. Use the official Frogpilot Fork</h1>
 
 <p>
   <b>openpilot is an operating system for robotics.</b>
   <br>
   Currently, it upgrades the driver assistance system in 300+ supported cars.
+  
 </p>
 
 <h3>
