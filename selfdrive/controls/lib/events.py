@@ -389,6 +389,23 @@ def no_lane_available_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.S
     Priority.LOWEST, VisualAlert.none, AudibleAlert.none, .2)
 
 
+def stop_light_or_sign_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, frogpilot_toggles: SimpleNamespace) -> Alert:
+  model_length = sm["frogpilotPlan"].modelLength
+
+  if model_length <= 5:
+    description = "Stop Now"
+  elif metric:
+    description = f"Stop approaching in {round(model_length)}m"
+  else:
+    description = f"Stop approaching in {round(model_length * 3.28084)}ft"
+
+  return Alert(
+    "Stop Light/Sign Detected. Please Brake.",
+    description,
+    AlertStatus.userPrompt, AlertSize.mid,
+    Priority.MID, VisualAlert.none, AudibleAlert.prompt, 3.)
+
+
 def torque_nn_load_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, frogpilot_toggles: SimpleNamespace) -> Alert:
   model_name = Params().get("NNFFModelName", encoding="utf-8")
   if model_name is None:
@@ -1071,11 +1088,7 @@ FROGPILOT_EVENTS: dict[int, dict[str, Alert | AlertCallbackType]] = {
   },
 
   FrogPilotEventName.stopLightOrSign: {
-    ET.PERMANENT: Alert(
-      "Stop Light/Sign Detected. Please Brake.",
-      "",
-      AlertStatus.userPrompt, AlertSize.small,
-      Priority.MID, VisualAlert.none, AudibleAlert.prompt, 3.),
+    ET.PERMANENT: stop_light_or_sign_alert,
   },
 
   FrogPilotEventName.holidayActive: {
