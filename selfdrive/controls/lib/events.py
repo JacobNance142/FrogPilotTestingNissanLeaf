@@ -403,7 +403,7 @@ def stop_light_or_sign_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.
     "Stop Light/Sign Detected. Please Brake.",
     description,
     AlertStatus.userPrompt, AlertSize.mid,
-    Priority.MID, VisualAlert.none, AudibleAlert.prompt, .1)
+    Priority.MID, VisualAlert.none, AudibleAlert.warningSoft, .1)
 
 
 def torque_nn_load_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, frogpilot_toggles: SimpleNamespace) -> Alert:
