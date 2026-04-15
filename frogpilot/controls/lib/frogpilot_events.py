@@ -76,7 +76,7 @@ class FrogPilotEvents:
     else:
       self.stopped_for_light = False
 
-    if not frogpilot_toggles.conditional_experimental_mode and self.frogpilot_planner.cem.stop_light_detected and not self.frogpilot_planner.tracking_lead:
+    if not frogpilot_toggles.conditional_experimental_mode and self.frogpilot_planner.cem.stop_light_detected and not self.frogpilot_planner.tracking_lead and sm["carState"].vEgo > 5 * CV.MPH_TO_MS:
       self.events.add(FrogPilotEventName.stopLightOrSign)
       self.stop_alert_played = True
     else:
