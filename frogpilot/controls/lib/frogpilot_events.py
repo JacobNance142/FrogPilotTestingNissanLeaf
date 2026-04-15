@@ -76,10 +76,12 @@ class FrogPilotEvents:
     else:
       self.stopped_for_light = False
 
-    if not frogpilot_toggles.conditional_experimental_mode and self.frogpilot_planner.cem.stop_light_detected and not self.frogpilot_planner.tracking_lead and sm["carState"].vEgo > 5 * CV.MPH_TO_MS:
-      self.events.add(FrogPilotEventName.stopLightOrSign)
+    stop_detected = not frogpilot_toggles.conditional_experimental_mode and self.frogpilot_planner.cem.stop_light_detected and not self.frogpilot_planner.tracking_lead
+    if stop_detected and not self.stop_alert_played and sm["carState"].vEgo > 10 * CV.MPH_TO_MS:
       self.stop_alert_played = True
-    else:
+    if self.stop_alert_played and stop_detected and sm["carState"].vEgo > 5 * CV.MPH_TO_MS:
+      self.events.add(FrogPilotEventName.stopLightOrSign)
+    if not stop_detected:
       self.stop_alert_played = False
 
     if "holidayActive" not in self.played_events and self.startup_seen and alerts_empty and len(self.events) == 0 and frogpilot_toggles.current_holiday_theme != "stock":
